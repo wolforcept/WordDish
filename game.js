@@ -3653,6 +3653,31 @@ const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"
 const probabilities = [8.4966, 2.0720, 4.5388, 3.3844, 11.161, 1.8121, 2.4705, 3.0034, 7.5448, 0.1965, 1.1016, 5.4893, 3.0129, 6.6544, 7.1635, 3.1671, 0.1962, 7.5809, 5.7351, 6.9509, 3.6308, 1.0074, 1.2899, 0.2902, 1.7779, 0.2722];
 
 const objectiveWords = [];
+let sureLetters = [];
+resetSureLetters();
+
+function resetSureLetters() {
+    sureLetters = [...letters, ...vowels, ...vowels]
+    shuffle(sureLetters)
+}
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
 
 function randomWord() {
     const index = Math.floor(Math.random() * wordsSimpler.length);
@@ -3662,6 +3687,13 @@ function randomWord() {
 function randomLetter() {
     if (Math.random() < .05)
         return vowels[Math.floor(Math.random() * vowels.length)]
+
+    if (Math.random() < .33) {
+        const ret = sureLetters.pop();
+        if (sureLetters.length === 0) resetSureLetters();
+        return ret;
+    }
+
     let r = Math.random();
     for (const i in letters) {
         if (r < probabilities[i] / 100)

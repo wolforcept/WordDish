@@ -81,6 +81,7 @@ h1 {
     width: var(--size);
     height: var(--size);
     background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 
 #centre {
@@ -251,15 +252,27 @@ a {
         margin: 0;
         display: flex;
         flex-direction: row;
-        height: 80px;
         width: 100vw;
         /* overflow-y: none; */
     }
 
-    #donewords,
-    #objectives {
-        overflow-x: scroll;
+    #donewords {
+        height: 80px;
+    }
 
+    #objectives {
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .objective {
+        margin: 10px;
+        width: 75px;
+    }
+
+    #donewords {
+        overflow-x: scroll;
     }
 
     svg {
@@ -321,5 +334,13 @@ a {
     #instructions .inner {
         font-size: 22px;
         max-width: 100vw;
+    }
+
+    #cleans {
+        justify-content: center;
+    }
+
+    #cleans svg:nth-child(n+6) {
+        display: none;
     }
 }
